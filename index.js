@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(urlencoded({extended:true}));
 app.use(cookieParser());
 const corsOptions = {
-    origin:"https://expense-tracker-plum-three-83.vercel.app/",
+    origin:"https://expense-tracker-plum-three-83.vercel.app",
     credentials:true
 }
 app.use(cors(corsOptions));
