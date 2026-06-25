@@ -3,12 +3,15 @@ import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import cors from "cors";
 import path from "path";
+import { fileURLToPath } from "url";
 import connectDB from "./database/db.js";
 import userRoute from "./routes/user.route.js";
 import expenseRoute from "./routes/expense.route.js";
 
-dotenv.config({});
+dotenv.config();
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 8000;
