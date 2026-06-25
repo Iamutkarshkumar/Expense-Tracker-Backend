@@ -2,6 +2,7 @@ import express, { urlencoded } from "express";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import cors from "cors";
+import path from "path";
 import connectDB from "./database/db.js";
 import userRoute from "./routes/user.route.js";
 import expenseRoute from "./routes/expense.route.js";
@@ -28,6 +29,13 @@ app.use(cors(corsOptions));
 app.use("/api/v1/user",userRoute);
 app.use("/api/v1/expense",expenseRoute);
 
+// Serve static files from frontend dist folder
+app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+// Fallback: serve index.html for all non-API routes (for React Router)
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
+});
 
 app.listen(PORT,()=>{
     connectDB();
