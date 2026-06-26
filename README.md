@@ -1,84 +1,113 @@
-# 🔧 Expense Tracker – Backend
+# 🔧 Expense Tracker — Backend
 
-A secure and scalable **backend API** for the Expense Tracker application.  
-This backend powers the live frontend application.
+A secure REST API powering the Expense Tracker application. Built with **Node.js**, **Express 5**, and **MongoDB**, it handles user authentication via JWT and full CRUD operations for expense data.
 
-🔗 **Live Website (Frontend using this API)**  
-🌐 https://expense-tracker-plum-three-83.vercel.app
-
----
-
-## 🚀 What This Backend Does
-- 🔐 Handles user authentication using JWT
-- 📦 Manages expense data (CRUD operations)
-- 🔒 Protects routes with middleware
-- ⚙️ Connects and interacts with MongoDB
-- ❌ Centralized error handling and validation
+🔗 **Frontend (Live):** [expense-tracker-plum-three-83.vercel.app](https://expense-tracker-plum-three-83.vercel.app)  
+🔗 **Frontend Repo:** [github.com/Iamutkarshkumar/Expense-Tracker-](https://github.com/Iamutkarshkumar/Expense-Tracker-)
 
 ---
 
 ## 🛠️ Tech Stack
-- 🟢 Node.js
-- 🚀 Express.js
-- 🍃 MongoDB
-- 📦 Mongoose
-- 🔑 JSON Web Token (JWT)
-- 🔐 bcrypt.js
+
+- **Runtime:** Node.js (ESM)
+- **Framework:** Express.js v5
+- **Database:** MongoDB + Mongoose
+- **Auth:** JSON Web Tokens (JWT) + bcryptjs
+- **Other:** cookie-parser, cors, dotenv
+
+---
+
+## 📁 Project Structure
+
+```
+├── controllers/
+│   ├── user.controller.js      # Register, login
+│   └── expense.controller.js   # Add, get, update, delete, toggle done
+├── middleware/
+│   └── isAuthenticated.js      # JWT verification middleware
+├── models/
+│   ├── user.model.js
+│   └── expense.model.js
+├── routes/
+│   ├── user.route.js
+│   └── expense.route.js
+├── database/
+│   └── db.js                   # MongoDB connection
+└── index.js                    # App entry point
+```
+
+---
+
+## 📡 API Reference
+
+### Auth — `/api/v1/user`
+
+| Method | Endpoint | Auth | Description |
+|---|---|---|---|
+| POST | `/register` | No | Register a new user |
+| POST | `/login` | No | Login and receive JWT cookie |
+
+### Expenses — `/api/v1/expense`
+
+All expense routes require authentication (JWT cookie).
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/getall` | Get all expenses for logged-in user (filterable by category and done status) |
+| POST | `/add` | Add a new expense |
+| PUT | `/update/:id` | Update an expense |
+| DELETE | `/remove/:id` | Delete an expense |
+| PUT | `/:id/done` | Toggle done/undone status |
 
 ---
 
 ## ⚙️ Getting Started
 
-### 1️⃣ Clone the repository  
-git clone https://github.com/your-username/Expense-Tracker-Backend.git
+### Prerequisites
+- Node.js v18+
+- A MongoDB URI (local or [MongoDB Atlas](https://www.mongodb.com/cloud/atlas))
 
-### 2️⃣ Navigate to the project directory  
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/Expense-Tracker-Backend.git
 cd Expense-Tracker-Backend
 
-### 3️⃣ Install dependencies  
+# Install dependencies
 npm install
 
-### 4️⃣ Start the server  
+# Set up environment variables
+cp .env.example .env
+
+# Start development server
 npm run dev
+```
+
+### Environment Variables
+
+Create a `.env` file in the project root:
+
+```env
+PORT=8000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret_key
+```
 
 ---
 
-## 🔐 Environment Variables
+## 🚀 Scripts
 
-Create a `.env` file in the root directory:
-
-PORT=5000  
-MONGO_URI=your_mongodb_connection_string  
-JWT_SECRET=your_secret_key  
-
----
-
-## 📡 API Overview
-
-Method | Endpoint | Description  
-POST | /api/auth/signup | Register a new user  
-POST | /api/auth/login | Authenticate user  
-GET | /api/expenses | Fetch all expenses  
-POST | /api/expenses | Add a new expense  
-PUT | /api/expenses/:id | Update an expense  
-DELETE | /api/expenses/:id | Delete an expense  
-
----
-
-## 🧩 Architecture
-- RESTful API design
-- MVC-style folder structure
-- Middleware-based authentication
-- Secure request handling
-
----
-
-## 📌 Project Status
-🛠️ Backend under active development
+```bash
+npm run dev    # Start with nodemon (hot reload)
+npm start      # Start production server
+npm run build  # Build the frontend (runs npm install + vite build in ../frontend)
+```
 
 ---
 
 ## 👨‍💻 Author
-**Utkarsh Kumar**
 
-⭐ Star the repository if you find it useful!
+**Utkarsh Kumar** — B.Tech CSAI, NSUT  
+
+⭐ Star the repo if it helped!
